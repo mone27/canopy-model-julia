@@ -1,0 +1,1 @@
+This is an experiment repository to port to Julia the code developed in [Canopy Model in R](https://github.com/mone27/canopy-model)

@@ -140,7 +140,7 @@ function diffuse_radiation(sw_sky_d, LAI, Kb, Kd, beta, beta0, omega_leaf, clump
   i_up_d =  i_upw_d(0)
   i_down_d =  i_dwn_d(LAI)
   
-  return DataFrame(:ic_d => ic_d, :ic_sun_d => ic_sun_d, :ic_sha_d => ic_sha_d, :ig_d => ig_d, :i_up_d => i_up_d, :i_down_d => i_down_d)
+  return (ic_d = ic_d, ic_sun_d = ic_sun_d, :ic_sha_d => ic_sha_d, :ig_d => ig_d, :i_up_d => i_up_d, :i_down_d => i_down_d)
 end
 
 #' Calculate the shortwave radiation absorbed by the canopy with sunlit and shaded components
@@ -169,7 +169,8 @@ function shortwave_radiation(sw_sky_b, sw_sky_d, LAI, Kb, Kd, beta, beta0, omega
   ig = ib.ig_b + id.ig_d
   i_up = ib.i_up_b + id.i_up_d
   i_down = ib.i_down_b + id.i_down_d
-  
-  return DataFrame(:ic => ic, :ic_sun => ic_sun, :ic_sha => ic_sha, :ig => ig, :i_up => i_up, :i_down => i_down)
+
+  # definitely need to make this nicer  
+  return vcat([ic, ic_sun, ic_sha, ig, i_up, i_down]...)
   
 end

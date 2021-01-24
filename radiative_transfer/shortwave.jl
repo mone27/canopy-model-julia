@@ -70,7 +70,7 @@ function direct_beam_radiation(sw_sky_b, LAI, Kb, Kd, beta, beta0, omega_leaf, c
     i_up_b = i_upw_b(0)
     i_down_b = i_dwn_b(LAI)
 
-    return Dataframe(:ic_b => ic_b, :ic_sun_b => ic_sun_b, :ic_sha_b => ic_sha_b, :ig_b => ig_b, :i_up_b => i_up_b, :i_down_b => i_down_b)
+    return DataFrame(:ic_b => ic_b, :ic_sun_b => ic_sun_b, :ic_sha_b => ic_sha_b, :ig_b => ig_b, :i_up_b => i_up_b, :i_down_b => i_down_b)
                 
 end
 
@@ -140,7 +140,7 @@ function diffuse_radiation(sw_sky_d, LAI, Kb, Kd, beta, beta0, omega_leaf, clump
   i_up_d =  i_upw_d(0)
   i_down_d =  i_dwn_d(LAI)
   
-  return Dataframe(:ic_d => ic_d, :ic_sun_d => ic_sun_d, :ic_sha_d => ic_sha_d, :ig_d => ig_d, :i_up_d => i_up_d, :i_down_d => i_down_d)
+  return DataFrame(:ic_d => ic_d, :ic_sun_d => ic_sun_d, :ic_sha_d => ic_sha_d, :ig_d => ig_d, :i_up_d => i_up_d, :i_down_d => i_down_d)
 end
 
 #' Calculate the shortwave radiation absorbed by the canopy with sunlit and shaded components
@@ -163,13 +163,13 @@ function shortwave_radiation(sw_sky_b, sw_sky_d, LAI, Kb, Kd, beta, beta0, omega
   ib = direct_beam_radiation(sw_sky_b, LAI, Kb, Kd, beta, beta0, omega_leaf, clump_OMEGA, alb_soil_b, alb_soil_d)
   id = diffuse_radiation(sw_sky_d, LAI, Kb, Kd, beta, beta0, omega_leaf, clump_OMEGA, alb_soil_d)
   
-  ic = ib[:ic_b] + id[:ic_d]
-  ic_sun = ib[:ic_sun_b] + id[:ic_sun_d]
-  ic_sha = ib[:ic_sha_b] + id[:ic_sha_d]
-  ig = ib[:ig_b] + id[:ig_d]
-  i_up = ib[:i_up_b] + id[:i_up_d]
-  i_down = ib[:i_down_b] + id[:i_down_d]
+  ic = ib.ic_b + id.ic_d
+  ic_sun = ib.ic_sun_b + id.ic_sun_d
+  ic_sha = ib.ic_sha_b + id.ic_sha_d
+  ig = ib.ig_b + id.ig_d
+  i_up = ib.i_up_b + id.i_up_d
+  i_down = ib.i_down_b + id.i_down_d
   
-  return Dataframe(:ic => ic, :ic_sun => ic_sun, :ic_sha => ic_sha, :ig => ig, :i_up => i_up, :i_down => i_down)
+  return DataFrame(:ic => ic, :ic_sun => ic_sun, :ic_sha => ic_sha, :ig => ig, :i_up => i_up, :i_down => i_down)
   
 end

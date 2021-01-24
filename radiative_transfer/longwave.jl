@@ -63,7 +63,7 @@ function longwave_radiation(lw_sky, LAI, t_leaf, t_soil, Kb, Kd, em_leaf, em_soi
 
   lc_sha = lc - lc_sun
 
-  return Dataframe(:lc => lc,                        # Lw radiation absorbed by the canopy
+  return DataFrame(:lc => lc,                        # Lw radiation absorbed by the canopy
               :lg => lg,                        # Lw radiation absorbed by the soil
               :lc_sun => lc_sun,                # Lw radiation absorbed by the sunlit canopy
               :lc_sha => lc_sha,                # Lw radiation absorbed by the shaded canopy

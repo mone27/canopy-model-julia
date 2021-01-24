@@ -1,3 +1,5 @@
+import Dates
+
 #' Simple model to get current LAI
 #'
 #' Use a simple model to get the LAI of the different day of the year.
